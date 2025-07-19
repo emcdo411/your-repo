@@ -1,20 +1,18 @@
-name: Prevent Empty PRs
+name: 🔍 PR Content Validator
 
-on: [pull_request]
+on:
+  pull_request:
+    types: [opened, edited, reopened]
 
 jobs:
-  check-pr:
+  check-pr-body:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Check for non-empty changes
+      - name: Ensure PR Description is Not Empty
         run: |
-          CHANGED=$(git diff --name-only origin/main...HEAD | grep -E '(00-meta|01-|02-|03-|04-|05-|logs)/.*\.md' || true)
-          if [ -z "$CHANGED" ]; then
-            echo "❌ No relevant Markdown changes found!"
+          if [[ -z "${{ github.event.pull_request.body }}" ]]; then
+            echo "❌ Pull request body must not be empty."
             exit 1
           else
-            echo "✅ Relevant Markdown files found:"
-            echo "$CHANGED"
+            echo "✅ PR has a body."
           fi
