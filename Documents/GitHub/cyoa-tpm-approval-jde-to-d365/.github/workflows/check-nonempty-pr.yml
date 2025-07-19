@@ -1,0 +1,20 @@
+name: Prevent Empty PRs
+
+on: [pull_request]
+
+jobs:
+  check-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Check for non-empty changes
+        run: |
+          CHANGED=$(git diff --name-only origin/main...HEAD | grep -E '(00-meta|01-|02-|03-|04-|05-|logs)/.*\.md' || true)
+          if [ -z "$CHANGED" ]; then
+            echo "❌ No relevant Markdown changes found!"
+            exit 1
+          else
+            echo "✅ Relevant Markdown files found:"
+            echo "$CHANGED"
+          fi
