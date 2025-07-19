@@ -1,25 +1,14 @@
-name: Daily TPM Log Generator
+name: 📅 Daily TPM Log Commit
 
 on:
-  schedule:
-    - cron: '0 14 * * 1-5'
   workflow_dispatch:
+  schedule:
+    - cron: '0 13 * * *' # runs at 1 PM UTC (adjust as needed)
 
 jobs:
-  create-log:
+  log-commit:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
-
-      - name: Create Log File
+      - name: Log timestamped commit
         run: |
-          NOW=$(date +'%Y-%m-%d')
-          FILE="logs/daily-log-$NOW.md"
-          echo "# Daily Log – $NOW" >> $FILE
-          echo "## Summary\n\n## Blockers\n\n## Decisions\n\n" >> $FILE
-          git config user.name "CYOA Bot"
-          git config user.email "cyoa-bot@example.com"
-          git add $FILE
-          git commit -m "CYOA: Auto-generated log for $NOW"
-          git push
+          echo "✅ TPM Daily Log Entry: $(date)" >> log/$(date +'%Y-%m-%d').md

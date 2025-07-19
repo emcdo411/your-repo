@@ -1,18 +1,17 @@
-name: 🔍 PR Content Validator
+name: 🧠 Check Pull Request Body
 
 on:
+  workflow_dispatch:
   pull_request:
-    types: [opened, edited, reopened]
+    types: [opened, edited]
 
 jobs:
-  check-pr-body:
+  check-body:
     runs-on: ubuntu-latest
     steps:
-      - name: Ensure PR Description is Not Empty
+      - name: Check PR body is not empty
         run: |
-          if [[ -z "${{ github.event.pull_request.body }}" ]]; then
-            echo "❌ Pull request body must not be empty."
+          if [ -z "${{ github.event.pull_request.body }}" ]; then
+            echo "🚨 Pull request body is empty. Please provide a description."
             exit 1
-          else
-            echo "✅ PR has a body."
           fi
