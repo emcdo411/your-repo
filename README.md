@@ -6,19 +6,17 @@
 ![PRs](https://img.shields.io/github/issues-pr/emcdo411/cyoa-tpm-approval-jde-to-d365)
 ![Status](https://img.shields.io/badge/status-in_progress-yellow)
 
+```mermaid
 graph TD
     A[Dev raises PR or Issue] --> B[TPM Reviews]
     B --> |Approved| C[Log in /03-devops-pipeline-review]
     B --> |Rejected| D[Log in /02-migration-etl-phase]
     B --> |Needs Discussion| E[Escalate to Stakeholder]
-
-    E --> F[Create entry in /05-postmortem or /04-training-adoption]
-    F --> G[Schedule Steering Committee Review]
-
-    C --> H[Git Commit + Push]
-    D --> H
-    F --> H
-
+    E --> F[Postmortem or Stakeholder Review]
+    C --> G[Commit & Push]
+    D --> G
+    F --> G
+```
 
 This private repository is maintained by **Maurice McDonald**, serving as a personal, time-stamped approval and decision log during the enterprise migration from **JD Edwards 9.2 (JDE)** to **Microsoft Dynamics 365 (D365)**.
 
