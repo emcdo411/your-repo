@@ -1,5 +1,25 @@
 # ✅ CYOA (Cover Your Own Ass) GitHub Log – JDE to Dynamics 365 Migration
 
+![GitHub repo size](https://img.shields.io/github/repo-size/emcdo411/cyoa-tpm-approval-jde-to-d365)
+![Last Commit](https://img.shields.io/github/last-commit/emcdo411/cyoa-tpm-approval-jde-to-d365)
+![Issues](https://img.shields.io/github/issues/emcdo411/cyoa-tpm-approval-jde-to-d365)
+![PRs](https://img.shields.io/github/issues-pr/emcdo411/cyoa-tpm-approval-jde-to-d365)
+![Status](https://img.shields.io/badge/status-in_progress-yellow)
+
+graph TD
+    A[Dev raises PR or Issue] --> B[TPM Reviews]
+    B --> |Approved| C[Log in /03-devops-pipeline-review]
+    B --> |Rejected| D[Log in /02-migration-etl-phase]
+    B --> |Needs Discussion| E[Escalate to Stakeholder]
+
+    E --> F[Create entry in /05-postmortem or /04-training-adoption]
+    F --> G[Schedule Steering Committee Review]
+
+    C --> H[Git Commit + Push]
+    D --> H
+    F --> H
+
+
 This private repository is maintained by **Maurice McDonald**, serving as a personal, time-stamped approval and decision log during the enterprise migration from **JD Edwards 9.2 (JDE)** to **Microsoft Dynamics 365 (D365)**.
 
 It is used in the event you're functioning as a **Technical Program Manager (TPM)** or **Interim Project Manager (PM)**, and you need clear traceability across PRs, issues, decisions, blockers, and executive summaries.
