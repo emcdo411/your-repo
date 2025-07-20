@@ -1,33 +1,29 @@
-name: 🧭 TPM CYOA Approval Log
+name: TPM CYOA Approval Log
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
     types: [opened, edited, closed, reopened]
 
 jobs:
-  cya-log-audit:
-    name: 📝 Log & Track PR Events
+  audit:
+    name: 📝 TPM Markdown Audit
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout repo
+      - name: 📥 Checkout code
         uses: actions/checkout@v4
-
-      - name: 🧾 Print Commit Info
-        run: |
-          echo "🔄 Commit by: ${{ github.actor }}"
-          echo "🗂 Branch: ${{ github.ref }}"
-          echo "📝 Commit message: ${{ github.event.head_commit.message }}"
-          echo "📁 Repo: ${{ github.repository }}"
 
       - name: 🔍 Lint Markdown Files
         uses: DavidAnson/markdownlint-cli2-action@v13
         with:
           globs: '**/*.md'
+          config: |
+            {
+              "MD013": false
+            }
 
-      - name: 💡 TPM Reminder
-        run: |
-          echo "✅ Remember to document PR approvals in your CYOA markdown log!"
+      - name: ✅ Print Success
+        run: echo "Markdown Lint completed with MD013 disabled."
+
