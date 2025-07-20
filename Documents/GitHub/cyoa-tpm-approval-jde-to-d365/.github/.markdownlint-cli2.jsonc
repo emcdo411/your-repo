@@ -1,6 +1,0 @@
-{
-  "config": {
-    "default": true,
-    "MD013": false // This disables the 80-character line rule
-  }
-}
