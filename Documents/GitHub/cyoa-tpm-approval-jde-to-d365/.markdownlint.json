@@ -1,0 +1,4 @@
+{
+  "default": true,
+  "MD013": false // disables 80-character line length rule
+}
