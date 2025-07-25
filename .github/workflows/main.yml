@@ -19,11 +19,8 @@ jobs:
         uses: DavidAnson/markdownlint-cli2-action@v13
         with:
           globs: '**/*.md'
-          config: |
-            {
-              "MD013": false
-            }
+          config: '{ "MD013": false }'
 
       - name: ✅ Print Success
-        run: echo "Markdown Lint completed with MD013 disabled."
+        run: echo "✅ Markdown Lint completed successfully with MD013 disabled."
 
