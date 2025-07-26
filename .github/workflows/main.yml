@@ -1,26 +1,32 @@
-name: TPM CYOA Approval Log
+name: Markdown Lint Check
 
 on:
-  push:
-    branches: [main]
   pull_request:
-    types: [opened, edited, closed, reopened]
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
-  audit:
-    name: 📝 TPM Markdown Audit
+  markdownlint:
+    name: Run markdownlint
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout code
-        uses: actions/checkout@v4
+      - name: 🔃 Checkout code
+        uses: actions/checkout@v3
 
-      - name: 🔍 Lint Markdown Files
-        uses: DavidAnson/markdownlint-cli2-action@v13
+      - name: 🧰 Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          globs: '**/*.md'
-          config: '{ "MD013": false }'
+          node-version: '18'
 
-      - name: ✅ Print Success
-        run: echo "✅ Markdown Lint completed successfully with MD013 disabled."
+      - name: 📦 Install markdownlint-cli2
+        run: npm install -g markdownlint-cli2
+
+      - name: ✅ Run markdownlint with config
+        run: |
+          markdownlint-cli2 "**/*.md" "#node_modules" --config .markdownlint.json
 
