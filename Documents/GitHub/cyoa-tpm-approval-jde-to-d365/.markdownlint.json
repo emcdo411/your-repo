@@ -1,8 +1,8 @@
 {
   "default": true,
-  "MD013": false,   // 🔕 Disable line length rule
-  "MD041": false,   // 🔕 Allow first line to skip heading
-  "MD007": { "indent": 2 },  // ⬅️ Enforce 2-space list indentation
-  "MD004": "unordered",      // ✳️ Use consistent unordered list style (* instead of -)
-  "MD029": { "style": "ordered" } // 🔢 Ordered list item prefix must increment
+  "MD013": {
+    "line_length": 999,
+    "code_blocks": false,
+    "tables": false
+  }
 }
